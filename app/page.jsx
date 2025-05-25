@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import Heading from '@/components/Heading';
+>>>>>>> fe3e0a91f2ac9e50e8f2c23fee553e79f91428ca
 import RoomCard from '@/components/RoomCard';
 import Heading from '@/components/Heading';
 import rooms from '@/data/rooms.json';
