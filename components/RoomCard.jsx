@@ -7,7 +7,7 @@ const RoomCard = ({ room }) => {
       >
         <div className="flex flex-col sm:flex-row sm:space-x-4">
           <Image
-            src={ '/images/rooms/${room.image}' }
+            src={ `/images/rooms/${room.image}` }
             width={400}
             height={100}
             alt={ room.name }
@@ -17,7 +17,7 @@ const RoomCard = ({ room }) => {
             <h4 className="text-lg font-semibold">{ room.name }</h4>
             <p className="text-sm text-gray-600">
               <span className="font-semibold text-gray-800"> Address:</span> 555
-              { room.address }
+              { room.address } 
             </p>
             <p className="text-sm text-gray-600">
               <span className="font-semibold text-gray-800"> Availability:</span>

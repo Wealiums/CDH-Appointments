@@ -53,7 +53,7 @@ const Header = () => {
                         href="register.html"
                         className="mr-3 text-gray-800 hover:text-gray-600"
                     >
-                        <FaUser classname='inline mr-1' /> Register
+                        <FaUser className='inline mr-1' /> Register
                     </Link>
                         {/* <!-- Logged In Only --> */}
                     <Link href="my-rooms.html">

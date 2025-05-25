@@ -2,7 +2,7 @@
   {
     "$id": "1",
     "user_id": "1",
-    "name": "Grand Conference Hall",
+    "name": "Michelle Weal",
     "description": "A spacious room with modern amenities, suitable for large conferences and events.",
     "sqft": 3000,
     "capacity": 100,
@@ -16,7 +16,7 @@
   {
     "$id": "2",
     "user_id": "1",
-    "name": "Executive Meeting Room",
+    "name": "Brian Weal",
     "description": "Ideal for executive meetings and small group discussions.",
     "sqft": 500,
     "capacity": 8,
@@ -68,5 +68,19 @@
     "availability": "7 AM - 7 PM",
     "price_per_hour": 60,
     "image": "room-5.jpg"
-  }
+  },
+  {
+    "$id": "6",
+    "user_id": "2",
+    "name": "Quiet Meeting Room",
+    "description": "A small, quiet space ideal for private meetings and interviews.",
+    "sqft": 200,
+    "capacity": 10,
+    "location": "Building E, 4th Floor",
+    "address": "10 Downing St, Westminster, London SW1A 2AA, United Kingdom",
+    "amenities": "Conference Phone, Television, Wi-Fi",
+    "availability": "7 AM - 7 PM",
+    "price_per_hour": 60,
+    "image": "room-5.jpg"
+  }  
 ]
