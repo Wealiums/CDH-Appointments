@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 
-const RoomPage = ({ params }) => {
-    const { id } = params;
+const RoomPage = async ({ params }) => { 
+    const { id } = await params;
     const room = rooms.find((room) => room.$id === id);
 
     if (!room) {
