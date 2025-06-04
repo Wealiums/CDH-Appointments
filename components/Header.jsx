@@ -29,7 +29,7 @@ const Header = () => {
                         </Link>
                         {/* <!-- Logged In Only --> */}
                         <Link
-                        href="/add-room"
+                        href="/rooms/add"
                         className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                         >
                         Add Room
@@ -56,7 +56,7 @@ const Header = () => {
                         <FaUser className='inline mr-1' /> Register
                     </Link>
                         {/* <!-- Logged In Only --> */}
-                    <Link href="/my-rooms">
+                    <Link href="/rooms/my">
                         <FaBuilding className='inline mr-1' /> My Rooms
                     </Link>
                         {/* <!-- Logged In Only --> */}
@@ -91,7 +91,7 @@ const Header = () => {
                 </Link>
                         {/* <!-- Logged In Only --> */}
                 <Link
-                    href="/add-room"
+                    href="/rooms/add"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                 >
                     Add Room
