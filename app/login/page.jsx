@@ -1,9 +1,13 @@
 import Link from 'next/link';
+import { useEffect } from 'react';
+import { useActionState } from 'react-dom';
+import createSession from '../actions/createSession';
 
 const LoginPage = () => {
-    return ( <div className="flex items-center justify-center">
+    return ( 
+    <div className="flex items-center justify-center">
         <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20">
-          <form>
+          <form action={createSession}>
             <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
               Login
             </h2>
