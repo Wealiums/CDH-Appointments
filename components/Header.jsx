@@ -24,7 +24,7 @@ const Header = () => {
     }, []);
 
     const handleLogout = async () => {
-        const { sucess, error } = await destroySession();
+        const { success, error } = await destroySession();
 
         if (success) {
             router.push('/login');
@@ -95,13 +95,17 @@ const Header = () => {
                     ) }
                     
                         {/* <!-- Logged In Only --> */}
-                    <Link href="/rooms/my">
+                    { isAuthenticated && (
+                        <>
+                        <Link href="/rooms/my">
                         <FaBuilding className='inline mr-1' /> My Rooms
                     </Link>
                         {/* <!-- Logged In Only --> */}
                     <button onClick={handleLogout} className="mx-3 text-gray-800 hover:text-gray-600">
                         <FaSignOutAlt className='inline mr-1' /> Sign Out
                     </button>
+                        </>
+                    )}
                         {/* <!-- Logged In Only --> */}
                     </div>
                 </div>
@@ -119,7 +123,9 @@ const Header = () => {
                 </Link>
                         {/* <!-- Logged In Only --> */}
                 {/* <!-- Logged In Only --> */}
-                <Link
+                { isAuthenticated && (
+                    <>
+                    <Link
                     href="/bookings"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                 >
@@ -132,6 +138,9 @@ const Header = () => {
                 >
                     Add Room
                 </Link>
+                    </>
+                )}
+                
                         {/* <!-- Logged In Only --> */}
                 </div>
             </div>
