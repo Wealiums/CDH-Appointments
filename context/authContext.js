@@ -9,8 +9,13 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => { 
         const checkAuthentication = async () => {
-            const { isAuthenticated }
+            const { isAuthenticated, user } = await checkAuth();
+            setIsAuthenticated(isAuthenticated);
+            setCurrentUser(user);
+
         }
+
+        checkAuthentication();
      }, []);
         
 
@@ -24,4 +29,12 @@ export const AuthProvider = ({ children }) => {
             { children }
         </AuthContext.Provider>
     )
+};
+
+export const useAuth = () => {
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider'); 
+    }
+    return context;
 };
