@@ -44,28 +44,17 @@ const Header = () => {
                         Rooms
                         </Link>
                         {/* <!-- Logged In Only --> */}
-<<<<<<< HEAD
-                        <Link
-                        href="/bookings"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-=======
                         { isAuthenticated && (
                             <>
                             <Link
                             href="/bookings"
                             className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
                         >
                             Bookings
                         </Link>
                         <Link
-<<<<<<< HEAD
-                        href="/add-room"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-=======
                             href="/rooms/add"
                             className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
                         >
                         Add Room
                         </Link>
@@ -80,13 +69,9 @@ const Header = () => {
                 <div className="ml-auto">
                     <div className="ml-4 flex items-center md:ml-6">
                     {/* <!-- Logged Out Only --> */}
-<<<<<<< HEAD
-                    <Link
-=======
                     { !isAuthenticated && (
                         <>
                         <Link
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
                         href="/login"
                         className="mr-3 text-gray-800 hover:text-gray-600"
                     >
@@ -103,18 +88,6 @@ const Header = () => {
                     ) }
                     
                         {/* <!-- Logged In Only --> */}
-<<<<<<< HEAD
-                    <Link href="/my-rooms">
-                        <FaBuilding className='inline mr-1' /> My Rooms
-                    </Link>
-                        {/* <!-- Logged In Only --> */}
-                    <Link
-                        href="/login"
-                        className="mx-3 text-gray-800 hover:text-gray-600"
-                    >
-                        <FaSignOutAlt className='inline mr-1' /> Sign Out
-                    </Link>
-=======
                     { isAuthenticated && (
                         <>
                         <Link href="/rooms/my">
@@ -126,7 +99,6 @@ const Header = () => {
                     </button>
                         </>
                     )}
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
                         {/* <!-- Logged In Only --> */}
                     </div>
                 </div>
@@ -144,13 +116,9 @@ const Header = () => {
                 </Link>
                         {/* <!-- Logged In Only --> */}
                 {/* <!-- Logged In Only --> */}
-<<<<<<< HEAD
-                <Link
-=======
                 { isAuthenticated && (
                     <>
                     <Link
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
                     href="/bookings"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                 >
@@ -158,11 +126,7 @@ const Header = () => {
                 </Link>
                         {/* <!-- Logged In Only --> */}
                 <Link
-<<<<<<< HEAD
-                    href="/add-room"
-=======
                     href="/rooms/add"
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                 >
                     Add Room

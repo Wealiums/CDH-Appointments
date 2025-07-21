@@ -15,11 +15,7 @@ async function getAllRooms() {
         );
 
         // Revalidate the cache for this path
-<<<<<<< HEAD
-        revalidatePath('/', 'layout');
-=======
         // revalidatePath('/', 'layout');
->>>>>>> 17f32d1ab1094769f88ed438e2e8f1126a1df1e0
 
         return rooms;
     } catch (error) {
