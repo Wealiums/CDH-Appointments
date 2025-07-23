@@ -28,36 +28,31 @@ const Header = () => {
 
 
     return (
-        <header className="bg-gray-100">
+        <header className="bg-gray-900 border-b border-green-600">
             <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                 <div className="flex items-center">
                     <Link href="/">
-                    <Image className="h-12 w-12" src={ logo } alt="Bookit" priority={true}/>
+                    <Image className="h-12 w-12" src={ logo } alt="CDH Appointments" priority={true}/>
                     </Link>
                     <div className="hidden md:block">
                     <div className="ml-10 flex items-baseline space-x-4">
                         <Link
                         href="/"
-                        className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                        className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-green-600 hover:text-white"
                         >
-                        Rooms
+                        Accountants
                         </Link>
                         {/* <!-- Logged In Only --> */}
                         { isAuthenticated && (
                             <>
                             <Link
                             href="/bookings"
-                            className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                            className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-green-600 hover:text-white"
                         >
-                            Bookings
+                            Appointments
                         </Link>
-                        <Link
-                            href="/rooms/add"
-                            className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-                        >
-                        Add Room
-                        </Link>
+
                             </>
                         ) }
                         
@@ -73,14 +68,14 @@ const Header = () => {
                         <>
                         <Link
                         href="/login"
-                        className="mr-3 text-gray-800 hover:text-gray-600"
+                        className="mr-3 text-white hover:text-green-400"
                     >
                         <FaSignInAlt className='inline mr-1' /> Login
                     </Link>
                         
                     <Link
                         href="/register"
-                        className="mr-3 text-gray-800 hover:text-gray-600"
+                        className="mr-3 text-white hover:text-green-400"
                     >
                         <FaUser className='inline mr-1' /> Register
                     </Link>
@@ -90,13 +85,10 @@ const Header = () => {
                         {/* <!-- Logged In Only --> */}
                     { isAuthenticated && (
                         <>
-                        <Link href="/rooms/my">
-                        <FaBuilding className='inline mr-1' /> My Rooms
-                    </Link>
-                        {/* <!-- Logged In Only --> */}
-                    <button onClick={handleLogout} className="mx-3 text-gray-800 hover:text-gray-600">
-                        <FaSignOutAlt className='inline mr-1' /> Sign Out
-                    </button>
+
+                        <button onClick={handleLogout} className="mx-3 text-white hover:text-green-400">
+                          <FaSignOutAlt className='inline mr-1' /> Sign Out
+                        </button>
                         </>
                     )}
                         {/* <!-- Logged In Only --> */}
@@ -106,13 +98,13 @@ const Header = () => {
             </nav>
 
             {/* <!-- Mobile menu --> */}
-            <div className="md:hidden">
+            <div className="md:hidden bg-gray-800">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                 <Link
                     href="/"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                    className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-green-600 hover:text-white"
                 >
-                    Rooms
+                    Accountants
                 </Link>
                         {/* <!-- Logged In Only --> */}
                 {/* <!-- Logged In Only --> */}
@@ -120,17 +112,11 @@ const Header = () => {
                     <>
                     <Link
                     href="/bookings"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                    className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-green-600 hover:text-white"
                 >
-                    Bookings
+                    Appointments
                 </Link>
                         {/* <!-- Logged In Only --> */}
-                <Link
-                    href="/rooms/add"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
-                >
-                    Add Room
-                </Link>
                     </>
                 )}
                 

@@ -7,10 +7,10 @@ export default async function Home() {
   
   return (
     <>
-      <Heading title='Available rooms' />
+      <Heading title='Available accountants' />
       {rooms.length > 0 ? (
         rooms.map((room) => <RoomCard room={room} key={room.$id} />)
-      ) : (<p>No rooms available at the moment</p>) }
+      ) : (<p>No accountants available at the moment</p>) }
     </>
   );
 }

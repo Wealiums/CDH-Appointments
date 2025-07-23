@@ -3,7 +3,7 @@
     "$id": "1",
     "user_id": "1",
     "name": "Michelle Weal",
-    "description": "A spacious room with modern amenities, suitable for large conferences and events.",
+    "description": "A spacious accountant with modern amenities, suitable for large conferences and events.",
     "sqft": 3000,
     "capacity": 100,
     "location": "Building A, 3rd Floor",
@@ -44,7 +44,7 @@
   {
     "$id": "4",
     "user_id": "2",
-    "name": "Training Room",
+    "name": "Training Accountant",
     "description": "Equipped with the latest technology, perfect for training sessions and workshops.",
     "sqft": 1500,
     "capacity": 50,
@@ -58,7 +58,7 @@
   {
     "$id": "5",
     "user_id": "2",
-    "name": "Quiet Meeting Room",
+    "name": "Quiet Meeting Accountant",
     "description": "A small, quiet space ideal for private meetings and interviews.",
     "sqft": 200,
     "capacity": 10,
@@ -72,7 +72,7 @@
   {
     "$id": "6",
     "user_id": "2",
-    "name": "Quiet Meeting Room",
+    "name": "Quiet Meeting Accountant",
     "description": "A small, quiet space ideal for private meetings and interviews.",
     "sqft": 200,
     "capacity": 10,

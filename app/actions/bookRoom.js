@@ -28,20 +28,23 @@ async function bookRoom(previousState, formData) {
         }
 
         // Extract date and time from form data
-        const checkInDate = formData.get('check-in-date');
-        const checkInTime = formData.get('check-in-time');
-        const checkOutDate = formData.get('check-out-date');
-        const checkOutTime = formData.get('check-out-time');
+        const checkInDate = formData.get('check_in_date');
+        const checkInTime = formData.get('check_in_time');
+        const checkOutTime = formData.get('check_out_time');
+        const appointmentType = formData.get('appointment_type');
+        const bookingSummary = formData.get('booking_summary');
 
         // Combine date and time to ISO 8601 format
         const checkInDateTime = `${checkInDate}T${checkInTime}`;
-        const checkOutDateTime = `${checkOutDate}T${checkOutTime}`;
+        const checkOutDateTime = `${checkInDate}T${checkOutTime}`; // Use check_in_date for both
 
         const bookingData = {
             check_in: checkInDateTime,
             check_out: checkOutDateTime,
             user_id: user.id,
             room_id: formData.get('room_id'),
+            appointment_type: appointmentType,
+            booking_summary: bookingSummary
         };
 
         // Create booking

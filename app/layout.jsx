@@ -10,14 +10,14 @@ const inter = Inter({subsets: ["latin"],});
 
 export const metadata = {
   title: "CDH Booking System",
-  description: "Book a phone or in person meeting with a CDH accountent",
+  description: "Book a phone, zoom or in person meeting with a CDH accountant",
 };
 
 export default function RootLayout({ children }) {
   return (
     <AuthWrapper>
       <html lang="en">
-        <body className={ inter.className}>
+        <body className={`${inter.className} bg-gray-900 min-h-screen`}>
           <Header />
           <main className='mx-auto.max-w-7xl px-4 py-6 sm:px-6 lg:px-8'>
             {children}

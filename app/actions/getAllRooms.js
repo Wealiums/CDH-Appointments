@@ -8,7 +8,7 @@ async function getAllRooms() {
     try {
         const { databases } = await createAdminClient();
 
-        // Fetch rooms
+        // Fetch accountants
         const { documents: rooms } = await databases.listDocuments(
             process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
             process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ROOMS
@@ -19,7 +19,7 @@ async function getAllRooms() {
 
         return rooms;
     } catch (error) {
-        console.log('Failed to get rooms', error);
+        console.log('Failed to get accountants', error);
         redirect('/error');
     }
 }
