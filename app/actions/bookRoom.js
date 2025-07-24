@@ -6,6 +6,7 @@ import { ID } from "node-appwrite";
 import { redirect } from "next/navigation";
 import checkAuth from "./checkAuth";
 import { revalidatePath } from "next/cache";
+import validateBooking from "./validateBooking";
 
 async function bookRoom(previousState, formData) {
     const sessionCookie = (await cookies()).get('appwrite-session');
@@ -33,16 +34,26 @@ async function bookRoom(previousState, formData) {
         const checkOutTime = formData.get('check_out_time');
         const appointmentType = formData.get('appointment_type');
         const bookingSummary = formData.get('booking_summary');
+        const roomId = formData.get('room_id');
 
-        // Combine date and time to ISO 8601 format
-        const checkInDateTime = `${checkInDate}T${checkInTime}`;
-        const checkOutDateTime = `${checkInDate}T${checkOutTime}`; // Use check_in_date for both
+        // Combine date and time to ISO 8601 format (treating as local time)
+        const checkInDateTime = `${checkInDate}T${checkInTime}:00`;
+        const checkOutDateTime = `${checkInDate}T${checkOutTime}:00`; // Use check_in_date for both
+
+        // Validate booking with comprehensive checks
+        const validation = await validateBooking(roomId, checkInDateTime, checkOutDateTime, user.id);
+
+        if (validation.error) { 
+            return {
+                error: validation.error,
+            };
+         }
 
         const bookingData = {
             check_in: checkInDateTime,
             check_out: checkOutDateTime,
             user_id: user.id,
-            room_id: formData.get('room_id'),
+            room_id: roomId,
             appointment_type: appointmentType,
             booking_summary: bookingSummary
         };

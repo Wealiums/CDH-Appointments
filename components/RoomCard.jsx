@@ -16,7 +16,7 @@ const RoomCard = ({ room }) => {
           <div className="space-y-1">
             <h4 className="text-lg font-semibold text-white">{ room.name }</h4>
             <p className="text-sm text-gray-300">
-              <span className="font-semibold text-green-400">Phone Number:</span> { room.phone }
+              <span className="font-semibold text-green-400">Phone Number:</span> { room.phoneNumber }
             </p>
             <p className="text-sm text-gray-300">
               <span className="font-semibold text-green-400">Email:</span> { room.email }

@@ -15,10 +15,10 @@ const RoomPage = async ({ params }) => {
 
     return ( <>
         <Heading title={room.name} />
-        <div className="bg-white shadow rounded-lg p-6">
+        <div className="bg-gray-800 shadow rounded-lg p-6 border border-green-600">
             <Link
                 href="/"
-                className="flex items-center text-gray-600 hover:text-gray-800 mb-4"
+                className="flex items-center text-green-400 hover:text-green-300 mb-4"
             >
                 <FaChevronLeft className='inline mr-1' />
                 <span className="ml-2">Back to Accountants</span>
@@ -36,13 +36,13 @@ const RoomPage = async ({ params }) => {
                 <div className="mt-4 sm:mt-0 sm:flex-1">
                     <ul className="space-y-2">
                         <li>
-                            <span className="font-semibold text-gray-800">Phone Number:</span> {room.phone}
+                            <span className="font-semibold text-green-400">Phone Number:</span> <span className="text-white">{room.phoneNumber}</span>
                         </li>
                         <li>
-                            <span className="font-semibold text-gray-800">Email:</span> {room.email}
+                            <span className="font-semibold text-green-400">Email:</span> <span className="text-white">{room.email}</span>
                         </li>
                         <li>
-                            <span className="font-semibold text-gray-800">Availability:</span> {room.availability}
+                            <span className="font-semibold text-green-400">Availability:</span> <span className="text-white">{room.availability}</span>
                         </li>
                     </ul>
                 </div>

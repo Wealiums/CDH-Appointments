@@ -6,16 +6,21 @@ const BookedRoomCard = ({ booking }) => {
 
     // Format date and time
     const formatDateTime = (dateTimeString) => {
-        const date = new Date(dateTimeString);
-        const options = {
+        // Create date from the ISO string, treating it as local time
+        const [datePart, timePart] = dateTimeString.split('T');
+        const [year, month, day] = datePart.split('-');
+        const [time] = timePart.split('.');
+        const [hour, minute] = time.split(':');
+        
+        const date = new Date(year, month - 1, day, hour, minute);
+        return date.toLocaleString('en-US', {
+            month: 'long',
+            day: 'numeric', 
             year: 'numeric',
-            month: 'long', 
-            day: 'numeric',
             hour: 'numeric',
             minute: '2-digit',
             hour12: true
-        };
-        return date.toLocaleDateString('en-US', options);
+        });
     };
 
     return (       
@@ -35,7 +40,7 @@ const BookedRoomCard = ({ booking }) => {
           className="flex flex-col sm:flex-row w-full sm:w-auto sm:space-x-2 mt-2 sm:mt-0"
         >
           <Link
-            href={`/rooms/${room.$id}`}
+            href={`/appointments/${booking.$id}`}
             className="bg-green-600 text-white px-4 py-2 rounded mb-2 sm:mb-0 w-full sm:w-auto text-center hover:bg-green-700"
           >
             View Appointment
