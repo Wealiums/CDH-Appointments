@@ -2,21 +2,15 @@
 
 import checkAuth from './checkAuth';
 
-// Define additional admin email addresses (beyond the "admin" label)
+// Define additional admin email addresses
 const ADMIN_EMAILS = [
-    // Your specified admins
+
     'brodie.j.weal@gmail.com',
     'kaarina@cdhba.com.au',
-    
-    // Accountant emails from rooms data
-    'michelle.weal@cdhaccountants.com',
-    'brian.weal@cdhaccountants.com',
-    'creative.hub@cdhaccountants.com',
-    'training@cdhaccountants.com',
-    'quiet.meeting@cdhaccountants.com',
-    'quiet.meeting2@cdhaccountants.com',
-    'lizzy.walker@cdhaccountants.com',
-    'meg.hegarty@cdhaccountants.com'
+    'michelle@cdhba.com.au',
+    'brian@cdhba.com.au',
+    'elizabeth@cdhba.com.au',
+    'meg@cdhba.com.au'
 ];
 
 async function checkAdmin() {
