@@ -1,70 +1,101 @@
 import { redirect } from 'next/navigation';
 import checkAdmin from '../actions/checkAdmin';
+import getAllBookingsAdmin from '../actions/getAllBookingsAdmin';
 import Heading from '@/components/Heading';
 import Link from 'next/link';
-import { FaCalendarAlt, FaUsers, FaCog } from 'react-icons/fa';
+import CancelBookingButton from '@/components/CancelBookingButton';
 
-const AdminDashboard = async () => {
-  const { isAdmin } = await checkAdmin();
-  
-  if (!isAdmin) {
-    redirect('/');
+const formatDateTime = (dateTimeString) => {
+  const date = new Date(dateTimeString);
+  return date.toLocaleString('en-AU', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
+  });
+};
+
+// Helper to group bookings by accountant
+function groupByAccountant(bookings) {
+  const grouped = {};
+  for (const booking of bookings) {
+    const accountantName = booking.room_id?.name || booking.room_id || 'Unknown Accountant';
+    if (!grouped[accountantName]) grouped[accountantName] = [];
+    grouped[accountantName].push(booking);
   }
+  // Sort each accountant's bookings by check_in time
+  for (const name in grouped) {
+    grouped[name].sort((a, b) => new Date(a.check_in) - new Date(b.check_in));
+  }
+  return grouped;
+}
+
+const AdminPage = async () => {
+  const { isAdmin } = await checkAdmin();
+  if (!isAdmin) redirect('/');
+
+  const bookings = await getAllBookingsAdmin();
+  const grouped = groupByAccountant(bookings);
 
   return (
-    <>
-      <Heading title="Admin Dashboard" />
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        
-        {/* Bookings Management */}
-        <Link 
-          href="/admin/bookings"
-          className="bg-gray-800 border border-green-600 rounded-lg p-6 hover:bg-gray-700 transition-colors group"
-        >
-          <div className="flex items-center mb-4">
-            <FaCalendarAlt className="text-green-400 text-2xl mr-3" />
-            <h2 className="text-xl font-semibold text-white">All Bookings</h2>
-          </div>
-          <p className="text-gray-300">
-            View, manage and cancel all appointment bookings across all accountants.
-          </p>
-          <div className="mt-4 text-green-400 group-hover:text-green-300">
-            Manage Bookings →
-          </div>
-        </Link>
-
-        {/* Future: User Management */}
-        <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 opacity-60">
-          <div className="flex items-center mb-4">
-            <FaUsers className="text-gray-400 text-2xl mr-3" />
-            <h2 className="text-xl font-semibold text-gray-400">User Management</h2>
-          </div>
-          <p className="text-gray-500">
-            Manage user accounts and permissions.
-          </p>
-          <div className="mt-4 text-gray-500">
-            Coming Soon
-          </div>
-        </div>
-
-        {/* Future: System Settings */}
-        <div className="bg-gray-800 border border-gray-600 rounded-lg p-6 opacity-60">
-          <div className="flex items-center mb-4">
-            <FaCog className="text-gray-400 text-2xl mr-3" />
-            <h2 className="text-xl font-semibold text-gray-400">Settings</h2>
-          </div>
-          <p className="text-gray-500">
-            Configure system settings and preferences.
-          </p>
-          <div className="mt-4 text-gray-500">
-            Coming Soon
-          </div>
-        </div>
-
-      </div>
-    </>
+    <div className="w-full px-2 py-8">
+      <Heading title="All Bookings" />
+      {bookings.length === 0 ? (
+        <p className="text-gray-600 mt-4">No bookings found.</p>
+      ) : (
+        Object.entries(grouped).map(([accountant, accBookings]) => (
+          <section key={accountant} className="mb-10">
+            <h2 className="text-xl font-bold text-white mb-4">{accountant}</h2>
+            <ul className="space-y-4">
+              {accBookings.map((booking) => (
+                <li
+                  key={booking.$id}
+                  className="flex justify-between items-center bg-gray-800 rounded text-white border border-green-600 p-4"
+                >
+                  {/* Booking Info */}
+                  <div className="space-y-1 text-sm">
+                    <div>
+                      <span className="font-semibold">User:</span>{" "}
+                      <span>
+                        {booking.user_details?.name || booking.user_name || booking.user_id || 'Unknown'}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Type:</span>{" "}
+                      <span>{booking.appointment_type}</span>
+                    </div>
+                    <div>
+                      <span className="font-semibold">Start:</span>{" "}
+                      <span>{formatDateTime(booking.check_in)}</span>
+                    </div>
+                    <div>
+                      <span className="font-semibold">End:</span>{" "}
+                      <span>{formatDateTime(booking.check_out)}</span>
+                    </div>
+                  </div>
+                  {/* Buttons: side by side, same size */}
+                  <div className="flex gap-2 ml-6">
+                    <Link
+                      href={`/appointments/${booking.$id}`}
+                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors min-w-[140px] text-center"
+                    >
+                      View Appointment
+                    </Link>
+                    <CancelBookingButton
+                      bookingId={booking.$id}
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm transition-colors min-w-[140px] text-center"
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      )}
+    </div>
   );
 };
 
-export default AdminDashboard;
+export default AdminPage;

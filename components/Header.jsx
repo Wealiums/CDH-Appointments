@@ -7,13 +7,26 @@ import { FaUser, FaSignInAlt, FaSignOutAlt, FaBuilding } from 'react-icons/fa';
 import destroySession from '@/app/actions/destroySession';
 import {toast} from 'react-toastify';
 import { useAuth } from '@/context/authContext';
+import { useEffect, useState } from 'react';
+import checkAdmin from '@/app/actions/checkAdmin';
 
 const Header = () => {
     const router = useRouter();
-
     const { isAuthenticated, setIsAuthenticated } = useAuth();
 
-    
+    const [isAdmin, setIsAdmin] = useState(false);
+
+    useEffect(() => {
+        const fetchAdmin = async () => {
+            if (isAuthenticated) {
+                const { isAdmin } = await checkAdmin();
+                setIsAdmin(isAdmin);
+            } else {
+                setIsAdmin(false);
+            }
+        };
+        fetchAdmin();
+    }, [isAuthenticated]);
 
     const handleLogout = async () => {
         const { success, error } = await destroySession();
@@ -49,14 +62,20 @@ const Header = () => {
                             <Link
                             href="/bookings"
                             className="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-green-600 hover:text-white"
-                        >
-                            Appointments
-                        </Link>
-
+                            >
+                                Appointments
+                            </Link>
+                            {/* Admin Tab Button */}
+                            {isAdmin && (
+                                <Link
+                                    href="/admin"
+                                    className="rounded-md px-3 py-2 text-sm font-medium text-white bg-green-700 hover:bg-green-600"
+                                >
+                                    Admin
+                                </Link>
+                            )}
                             </>
                         ) }
-                        
-                        
                     </div>
                     </div>
                 </div>
@@ -100,27 +119,32 @@ const Header = () => {
             {/* <!-- Mobile menu --> */}
             <div className="md:hidden bg-gray-800">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                <Link
-                    href="/"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-green-600 hover:text-white"
-                >
-                    Accountants
-                </Link>
-                        {/* <!-- Logged In Only --> */}
-                {/* <!-- Logged In Only --> */}
-                { isAuthenticated && (
-                    <>
                     <Link
-                    href="/bookings"
-                    className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-green-600 hover:text-white"
-                >
-                    Appointments
-                </Link>
-                        {/* <!-- Logged In Only --> */}
-                    </>
-                )}
-                
-                        {/* <!-- Logged In Only --> */}
+                        href="/"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-green-600 hover:text-white"
+                    >
+                        Accountants
+                    </Link>
+                    {/* <!-- Logged In Only --> */}
+                    { isAuthenticated && (
+                        <>
+                            <Link
+                                href="/bookings"
+                                className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-green-600 hover:text-white"
+                            >
+                                Appointments
+                            </Link>
+                            {/* Admin Tab Button (Mobile) */}
+                            {isAdmin && (
+                                <Link
+                                    href="/admin"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-white bg-green-700 hover:bg-green-600"
+                                >
+                                    Admin
+                                </Link>
+                            )}
+                        </>
+                    )}
                 </div>
             </div>
         </header>

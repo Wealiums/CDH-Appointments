@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import checkAuth from './checkAuth';
+import checkAdmin from './checkAdmin';
 
 async function cancelBooking(bookingId) {
     const cookieStore = await cookies();
@@ -18,8 +19,9 @@ async function cancelBooking(bookingId) {
             sessionCookie.value
         );
 
-        // Get user's ID
+        // Get user's ID and admin status
         const { user } = await checkAuth();
+        const { isAdmin } = await checkAdmin();
 
         if (!user) {
             return {
@@ -28,17 +30,16 @@ async function cancelBooking(bookingId) {
         }
 
         // Get the appointment
-
         const booking = await databases.getDocument(
             process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
             process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_BOOKINGS,
             bookingId
         );
 
-        // Check if booking belongs to current user
-        if (booking.user_id !== user.id) {
+        // Allow if admin, or if booking belongs to current user
+        if (!isAdmin && booking.user_id !== user.id) {
             return {
-                error: 'You are not authorised to cancel this appointments'
+                error: 'You are not authorised to cancel this appointment'
             };
         }
 
@@ -49,7 +50,9 @@ async function cancelBooking(bookingId) {
             bookingId
         );
 
+        // Revalidate both user and admin bookings pages
         revalidatePath('/bookings', 'layout');
+        revalidatePath('/admin', 'layout');
 
         return {
             success: true
