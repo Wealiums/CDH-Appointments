@@ -5,9 +5,13 @@ import Heading from '@/components/Heading';
 import Link from 'next/link';
 import CancelBookingButton from '@/components/CancelBookingButton';
 
+// Add this import for deleting bookings
+import cancelBooking from '../actions/cancelBooking';
+
 const formatDateTime = (dateTimeString) => {
   const date = new Date(dateTimeString);
   return date.toLocaleString('en-AU', {
+    timeZone: 'Australia/Sydney',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -36,7 +40,19 @@ const AdminPage = async () => {
   const { isAdmin } = await checkAdmin();
   if (!isAdmin) redirect('/');
 
-  const bookings = await getAllBookingsAdmin();
+  let bookings = await getAllBookingsAdmin();
+
+  // Delete expired bookings
+  const now = new Date();
+  for (const booking of bookings) {
+    if (new Date(booking.check_out) < now) {
+      await cancelBooking(booking.$id);
+    }
+  }
+
+  // Refetch bookings after cleanup
+  bookings = await getAllBookingsAdmin();
+
   const grouped = groupByAccountant(bookings);
 
   return (

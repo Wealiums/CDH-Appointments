@@ -37,16 +37,18 @@ async function getBookingById(bookingId) {
 
         // Get room/accountant details
         if (booking.room_id) {
+            let roomId = typeof booking.room_id === 'object' && booking.room_id.$id
+                ? booking.room_id.$id
+                : booking.room_id;
             try {
                 const room = await databases.getDocument(
                     process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
                     process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ROOMS,
-                    booking.room_id
+                    roomId
                 );
                 booking.room_id = room;
             } catch (error) {
                 console.log('Could not fetch room details:', error);
-                // Continue without room details
             }
         }
 
