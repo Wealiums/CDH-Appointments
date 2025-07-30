@@ -13,7 +13,7 @@ const BookedRoomCard = ({ booking }) => {
         const [hour, minute] = time.split(':');
         
         const date = new Date(year, month - 1, day, hour, minute);
-        return date.toLocaleString('en-US', {
+        return date.toLocaleString('en-GB', {
             month: 'long',
             day: 'numeric', 
             year: 'numeric',

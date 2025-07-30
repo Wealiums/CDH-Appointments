@@ -20,7 +20,7 @@ const AdminBookingCard = ({ booking }) => {
 
   const formatDateTime = (dateTimeString) => {
     const date = parseAsLocalTime(dateTimeString);
-    return date.toLocaleString('en-US', {
+    return date.toLocaleString('en-GB', {
       month: 'short',
       day: 'numeric',
       year: 'numeric',
@@ -32,7 +32,7 @@ const AdminBookingCard = ({ booking }) => {
 
   const formatTime = (dateTimeString) => {
     const date = parseAsLocalTime(dateTimeString);
-    return date.toLocaleTimeString('en-US', {
+    return date.toLocaleTimeString('en-GB', {
       hour: 'numeric',
       minute: '2-digit',
       hour12: true

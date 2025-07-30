@@ -9,7 +9,7 @@ const RoomCard = ({ room }) => {
           <Image
             src={ `/images/rooms/${room.image}` }
             width={400}
-            height={100}
+            height={400}
             alt={ room.name }
             className="w-full sm:w-32 sm:h-32 mb-3 sm:mb-0 object-cover rounded-lg"
           />

@@ -24,8 +24,8 @@ const AppointmentDetailsPage = async ({ params }) => {
   // Format date and time
   const formatDateTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
-    return date.toLocaleString('en-AU', {
-      timeZone: 'Australia/Sydney',
+    return date.toLocaleString('en-GB', {
+      timeZone: 'UTC',
       month: 'long',
       day: 'numeric', 
       year: 'numeric',
@@ -37,8 +37,8 @@ const AppointmentDetailsPage = async ({ params }) => {
 
   const formatDate = (dateTimeString) => {
     const date = new Date(dateTimeString);
-    return date.toLocaleDateString('en-AU', {
-      timeZone: 'Australia/Sydney',
+    return date.toLocaleDateString('en-GB', {
+      timeZone: 'UTC',
       weekday: 'long',
       month: 'long',
       day: 'numeric',
@@ -48,8 +48,8 @@ const AppointmentDetailsPage = async ({ params }) => {
 
   const formatTime = (dateTimeString) => {
     const date = new Date(dateTimeString);
-    return date.toLocaleTimeString('en-AU', {
-      timeZone: 'Australia/Sydney',
+    return date.toLocaleTimeString('en-GB', {
+      timeZone: 'UTC',
       hour: 'numeric',
       minute: '2-digit',
       hour12: true

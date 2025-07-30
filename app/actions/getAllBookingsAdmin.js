@@ -22,6 +22,7 @@ async function getAllBookingsAdmin() {
         const { databases } = await createSessionClient(
             sessionCookie.value
         );
+        
 
         // Fetch ALL bookings (no user filter for admin)
         const { documents: bookings } = await databases.listDocuments(
@@ -36,7 +37,7 @@ async function getAllBookingsAdmin() {
                     const room = await databases.getDocument(
                         process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
                         process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ROOMS,
-                        booking.room_id
+                        String(booking.room_id)
                     );
                     return { ...booking, room_id: room };
                 } catch (error) {

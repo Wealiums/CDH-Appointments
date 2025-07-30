@@ -10,8 +10,8 @@ import cancelBooking from '../actions/cancelBooking';
 
 const formatDateTime = (dateTimeString) => {
   const date = new Date(dateTimeString);
-  return date.toLocaleString('en-AU', {
-    timeZone: 'Australia/Sydney',
+  return date.toLocaleString('en-GB', {
+    timeZone: 'UTC',
     month: 'short',
     day: 'numeric',
     year: 'numeric',
@@ -75,7 +75,7 @@ const AdminPage = async () => {
                     <div>
                       <span className="font-semibold">User:</span>{" "}
                       <span>
-                        {booking.user_details?.name || booking.user_name || booking.user_id || 'Unknown'}
+                        {booking.name || booking.user_details?.name || booking.user_id || 'Unknown'}
                       </span>
                     </div>
                     <div>

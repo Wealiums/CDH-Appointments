@@ -35,6 +35,8 @@ async function bookRoom(previousState, formData) {
         const appointmentType = formData.get('appointment_type');
         const bookingSummary = formData.get('booking_summary');
         const roomId = formData.get('room_id');
+        const userName = formData.get('user_name');
+        const name = formData.get('name');
 
         // Combine date and time to ISO 8601 format (treating as local time)
         const checkInDateTime = `${checkInDate}T${checkInTime}:00`;
@@ -53,6 +55,7 @@ async function bookRoom(previousState, formData) {
             check_in: checkInDateTime,
             check_out: checkOutDateTime,
             user_id: user.id,
+            name,
             room_id: roomId,
             appointment_type: appointmentType,
             booking_summary: bookingSummary

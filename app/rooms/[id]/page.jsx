@@ -30,7 +30,7 @@ const RoomPage = async ({ params }) => {
                     alt={room.name}
                     width={400}
                     height={100}
-                    className="w-full sm:w-1/3 h-64 object-cover rounded-lg"
+                    className="w-full sm:w-64 h-64 object-cover rounded-lg"
                 />
 
                 <div className="mt-4 sm:mt-0 sm:flex-1">
