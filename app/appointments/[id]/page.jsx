@@ -5,7 +5,7 @@ import { FaArrowLeft, FaCalendarAlt, FaClock, FaUser, FaPhone, FaVideo, FaBuildi
 import getBookingById from '@/app/actions/getBookingById';
 
 const AppointmentDetailsPage = async ({ params }) => {
-  const { id } = params;
+  const { id } = await params;
   const booking = await getBookingById(id);
 
   if (!booking) {
