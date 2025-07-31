@@ -91,7 +91,7 @@ const RegisterPage = () => {
 
               <p>
                 Have an account?
-                <Link href="/login" className="text-blue-500">Login</Link>
+                <Link href="/login" className="text-blue-500"> Login</Link>
               </p>
             </div>
           </form>
