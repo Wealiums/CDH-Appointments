@@ -72,18 +72,20 @@ const AdminPage = async () => {
                 >
                   {/* Booking Info */}
                   <div className="space-y-2 mb-4 md:mb-0">
-                    <div className="text-lg font-bold text-white">{booking.name || booking.user_details?.name || booking.user_id || 'Unknown'}</div>
-                    <div>
-                      <span className="font-semibold">Type:</span>{" "}
-                      <span>{booking.appointment_type}</span>
+                    <div className="text-lg font-bold text-white">
+                      {booking.name || booking.user_details?.name || booking.user_id || 'Unknown'}
                     </div>
                     <div>
-                      <span className="font-semibold">Start:</span>{" "}
-                      <span>{formatDateTime(booking.check_in)}</span>
+                      <span className="font-semibold text-white">Type:</span>{" "}
+                      <span className="text-white">{booking.appointment_type}</span>
                     </div>
                     <div>
-                      <span className="font-semibold">End:</span>{" "}
-                      <span>{formatDateTime(booking.check_out)}</span>
+                      <span className="font-semibold text-white">Start:</span>{" "}
+                      <span className="text-white">{formatDateTime(booking.check_in)}</span>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-white">End:</span>{" "}
+                      <span className="text-white">{formatDateTime(booking.check_out)}</span>
                     </div>
                   </div>
                   {/* Buttons: stack on mobile, row on desktop */}
