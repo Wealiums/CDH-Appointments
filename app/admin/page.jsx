@@ -64,20 +64,15 @@ const AdminPage = async () => {
         Object.entries(grouped).map(([accountant, accBookings]) => (
           <section key={accountant} className="mb-10">
             <h2 className="text-xl font-bold text-white mb-4">{accountant}</h2>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
               {accBookings.map((booking) => (
                 <li
                   key={booking.$id}
-                  className="flex justify-between items-center bg-gray-800 rounded text-white border border-green-600 p-4"
+                  className="bg-gray-800 rounded-lg border border-green-600 p-4 flex flex-col md:flex-row md:items-center md:justify-between"
                 >
                   {/* Booking Info */}
-                  <div className="space-y-1 text-sm">
-                    <div>
-                      <span className="font-semibold">User:</span>{" "}
-                      <span>
-                        {booking.name || booking.user_details?.name || booking.user_id || 'Unknown'}
-                      </span>
-                    </div>
+                  <div className="space-y-2 mb-4 md:mb-0">
+                    <div className="text-lg font-bold text-white">{booking.name || booking.user_details?.name || booking.user_id || 'Unknown'}</div>
                     <div>
                       <span className="font-semibold">Type:</span>{" "}
                       <span>{booking.appointment_type}</span>
@@ -91,17 +86,17 @@ const AdminPage = async () => {
                       <span>{formatDateTime(booking.check_out)}</span>
                     </div>
                   </div>
-                  {/* Buttons: side by side, same size */}
-                  <div className="flex gap-2 ml-6">
+                  {/* Buttons: stack on mobile, row on desktop */}
+                  <div className="flex flex-col gap-2 w-full md:w-auto md:flex-row md:gap-2 md:ml-6">
                     <Link
                       href={`/appointments/${booking.$id}`}
-                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors min-w-[140px] text-center"
+                      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm transition-colors w-full md:w-auto text-center"
                     >
                       View Appointment
                     </Link>
                     <CancelBookingButton
                       bookingId={booking.$id}
-                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm transition-colors min-w-[140px] text-center"
+                      className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm transition-colors w-full md:w-auto text-center"
                     />
                   </div>
                 </li>

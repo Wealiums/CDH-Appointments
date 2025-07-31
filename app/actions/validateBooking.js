@@ -88,24 +88,29 @@ async function validateBooking(roomId, checkIn, checkOut, userId = null) {
         const checkOutDateTime = toLocalDateTime(checkOut);
         const now = DateTime.now();
 
-        // 1. Check if booking is in the past
+        // Prevent bookings on weekends
+        if (checkInDateTime.weekday === 6 || checkInDateTime.weekday === 7) {
+            return { error: 'Appointments cannot be booked on weekends.' };
+        }
+
+        // Check if booking is in the past
         if (checkInDateTime <= now) {
             return { error: 'Cannot book appointments in the past' };
         }
 
-        // 2. Check if booking is within 1 hour of current time
+        // Check if booking is within 1 hour of current time
         const oneHourFromNow = now.plus({ hours: 1 });
         if (checkInDateTime < oneHourFromNow) {
             return { error: 'Cannot book appointments within 1 hour of current time' };
         }
 
-        // 3. Get room details for availability check
+        //  Get room details for availability check
         const room = await getSingleRoom(roomId);
         if (!room) {
             return { error: 'Room not found' };
         }
 
-        // 4. Check if booking is within room availability hours
+        //  Check if booking is within accountant availability hours
         const availabilityHours = parseAvailabilityHours(room.availability);
         if (availabilityHours) {
             // Convert booking times to decimal hours for comparison
@@ -119,7 +124,7 @@ async function validateBooking(roomId, checkIn, checkOut, userId = null) {
             }
         }
 
-        // 5. Check for user double booking (user has conflicting appointment with ANY accountant)
+        // Check for user double booking (user has conflicting appointment with an accountant)
         const { documents: userBookings } = await databases.listDocuments(
             process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
             process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_BOOKINGS,
@@ -140,7 +145,7 @@ async function validateBooking(roomId, checkIn, checkOut, userId = null) {
             }
         }
 
-        // 6. Check for accountant availability (accountant is not booked by someone else)
+        // Check for accountant availability (accountant is not booked by someone else)
         const { documents: accountantBookings } = await databases.listDocuments(
             process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
             process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_BOOKINGS,
